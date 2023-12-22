@@ -1,0 +1,5 @@
+profile: "basic"
+use_default_rules: true
+
+skip_list:
+- "galaxy[no-changelog]"

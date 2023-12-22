@@ -1,0 +1,29 @@
+---
+version: "1.0.0"
+
+namespace: "personal"
+name: "system"
+description: "Ansible collection for Linux system roles, playbooks and plugins."
+
+authors:
+  - "Alex Muir"
+
+readme: "README.md"
+license_file: "LICENSE"
+
+repository: "https://github.com/alexmuir97/ansible-collection-personal.system"
+documentation: "https://github.com/alexmuir97/ansible-collection-personal.system"
+homepage: "https://github.com/alexmuir97/ansible-collection-personal.system"
+issues: "https://github.com/alexmuir97/ansible-collection-personal.system/issues"
+
+tags:
+  - "linux"
+  - "infrastructure"
+  - "networking"
+  - "security"
+  - "storage"
+  - "tools"
+
+dependencies: {}
+
+build_ignore: []
