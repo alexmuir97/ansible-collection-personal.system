@@ -1,0 +1,5 @@
+---
+- name: "Manage timezone"
+  community.general.timezone:
+    name: "{{ timezone_name }}"
+  become: true
