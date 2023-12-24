@@ -1,5 +1,5 @@
 # Ansible Role: personal.system.hostname
-An Ansible Role to configure hostnames.
+An Ansible role to configure hostnames.
 
 ## Description
 The role configures the hostname, either from the given inventory hostname or a given hostname by a variable.
