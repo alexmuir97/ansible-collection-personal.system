@@ -1,0 +1,7 @@
+---
+update_package_name: "*"
+update_package_state: "latest"
+
+update_reboot_enabled: true
+update_reboot_timeout: 3600
+update_reboot_delay: 0
