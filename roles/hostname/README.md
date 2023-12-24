@@ -1,4 +1,4 @@
-# Ansible Role: hostname
+# Ansible Role: personal.system.hostname
 An Ansible Role to configure hostnames.
 
 ## Description
