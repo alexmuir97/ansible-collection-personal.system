@@ -47,5 +47,5 @@ The below examples should help to explain how the role can be used.
 
     - name: "Example with defaults"
       ansible.builtin.import_role:
-        name: "update"
+        name: "personal.system.update"
 ```
