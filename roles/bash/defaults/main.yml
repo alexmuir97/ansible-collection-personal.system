@@ -1,0 +1,5 @@
+---
+bash_package_name:
+  - "bash"
+  - "bash-completion"
+bash_package_state: "present"
