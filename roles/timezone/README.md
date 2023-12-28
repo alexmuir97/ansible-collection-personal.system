@@ -14,10 +14,14 @@ None.
 The role comes with default variables (via `defaults/main.yml`), which can be
 overridden.
 
-`timezone_name` is used to define the system's timezone. For Linux systems, a list of supported timezones can be found by running `$ timedatectl list-timezones`.
+`timezone_name` is used to define the system's timezone.
 
 ## Additional hints
-None.
+For supported Linux systems, a list of timezones can be found by running the following command:
+
+```shell
+$ timedatectl list-timezones
+```
 
 ## Examples
 The below examples should help to explain how the role can be used.
