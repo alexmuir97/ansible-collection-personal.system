@@ -1,0 +1,48 @@
+---
+- name: "Manage user accounts"
+  ansible.builtin.user:
+    name: "{{ user.username }}"
+    comment: "{{ user.comment }}"
+    groups: "{{ user.groups | default([]) }}"
+    password: "{{ user.password | default(omit) }}"
+    password_lock: "{{ user.password_lock | default(omit) }}"
+    uid: "{{ user.uid | default(omit) }}"
+    shell: "{{ user.shell | default(omit) }}"
+    create_home: '{{ user.create_home | default(omit) }}'
+    system: "{{ user.system | default(omit) }}"
+    state: "{{ user.state | default(present) }}"
+    remove: "{{ user.remove | default(omit) }}"
+  become: true
+  no_log: true
+
+- name: "Manage authorized keys"
+  ansible.posix.authorized_key:
+    user: "{{ user.username }}"
+    state: "{{ item.state | default('present') }}"
+    key: "{{ item.key }}"
+    exclusive: "{{ item.exclusive | default(true) }}"
+  become: true
+  loop: "{{ user.auth_keys }}"
+  when:
+    - "user.auth_keys is defined"
+    - "user.auth_keys | length > 0"
+
+- name: "Provide sudoers templates"
+  ansible.builtin.template:
+    src: "sudoers.d.user.j2"
+    dest: "/etc/sudoers.d/user-{{ user.username }}"
+    owner: "root"
+    group: "root"
+    mode: "0440"
+    validate: "visudo -cf %s"
+  become: true
+  when:
+    - "user.sudoer is defined"
+    - "user.sudoer | bool"
+
+- name: Manage sudoers template state
+  ansible.builtin.file:
+    path: "/etc/sudoers.d/user-{{ user.username }}"
+    state: "{{ 'file' if user.sudoer | default(false) else 'absent' }}"
+    mode: "0440"
+  become: true

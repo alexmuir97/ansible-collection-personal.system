@@ -1,0 +1,3 @@
+{{ ansible_managed | comment }}
+# Group rules for {{ group.name }}
+%{{ group.name }} ALL=(ALL) {% if group.sudoer_passwordless | default(false) %}NOPASSWD:{% endif %}ALL

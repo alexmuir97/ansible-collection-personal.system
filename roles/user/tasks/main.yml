@@ -1,0 +1,9 @@
+---
+- name: "Import user tasks"
+  ansible.builtin.include_tasks: "user.yml"
+  loop: "{{ user_users }}"
+  loop_control:
+    loop_var: "user"
+    label: "{{ user.username }}"
+  when:
+    - "user_users is defined"
