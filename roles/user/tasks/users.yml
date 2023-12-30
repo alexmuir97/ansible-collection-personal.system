@@ -1,5 +1,6 @@
 ---
 - name: "Manage user accounts"
+  become: true
   ansible.builtin.user:
     name: "{{ user.username }}"
     comment: "{{ user.comment }}"
@@ -12,22 +13,22 @@
     system: "{{ user.system | default(omit) }}"
     state: "{{ user.state | default(present) }}"
     remove: "{{ user.remove | default(omit) }}"
-  become: true
   no_log: true
 
 - name: "Manage authorized keys"
+  become: true
   ansible.posix.authorized_key:
     user: "{{ user.username }}"
     state: "{{ item.state | default('present') }}"
     key: "{{ item.key }}"
     exclusive: "{{ item.exclusive | default(true) }}"
-  become: true
   loop: "{{ user.auth_keys }}"
   when:
     - "user.auth_keys is defined"
     - "user.auth_keys | length > 0"
 
 - name: "Provide sudoers templates"
+  become: true
   ansible.builtin.template:
     src: "sudoers.d.user.j2"
     dest: "/etc/sudoers.d/user-{{ user.username }}"
@@ -35,14 +36,13 @@
     group: "root"
     mode: "0440"
     validate: "visudo -cf %s"
-  become: true
   when:
     - "user.sudoer is defined"
     - "user.sudoer | bool"
 
 - name: Manage sudoers template state
+  become: true
   ansible.builtin.file:
     path: "/etc/sudoers.d/user-{{ user.username }}"
     state: "{{ 'file' if user.sudoer | default(false) else 'absent' }}"
     mode: "0440"
-  become: true

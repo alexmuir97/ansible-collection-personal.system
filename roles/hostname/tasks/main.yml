@@ -1,5 +1,5 @@
 ---
 - name: "Manage hostname"
+  become: true
   ansible.builtin.hostname:
     name: "{{ hostname_name }}"
-  become: true

@@ -1,8 +1,8 @@
 ---
 - name: "Manage update packages"
+  become: true
   ansible.builtin.package:
     name: "{{ update_package_names }}"
     state: "{{ update_package_state }}"
-  become: true
   notify: "Reboot system"
   when: "update_reboot_enabled | bool"

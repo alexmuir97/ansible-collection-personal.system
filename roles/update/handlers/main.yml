@@ -1,8 +1,8 @@
 ---
 - name: "Reboot system"
+  become: true
   ansible.builtin.reboot:
     reboot_timeout: "{{ update_reboot_timeout }}"
     pre_reboot_delay: "{{ update_reboot_delay }}"
     msg: "Automatic reboot will occur in {{ update_reboot_delay }} seconds."
-  become: true
   when: "update_reboot_enabled"

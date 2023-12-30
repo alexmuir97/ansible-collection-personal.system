@@ -1,6 +1,6 @@
 ---
 - name: "Manage bash packages"
+  become: true
   ansible.builtin.package:
     name: "{{ bash_package_name }}"
     state: "{{ bash_package_state }}"
-  become: true
