@@ -2,7 +2,7 @@
 An Ansible role to install and configure Avahi.
 
 ## Description
-Avahi is a service discovery technology for Linux using multicast DNS (mDNS)/DNS Service Discovery (DNS-SD) which eases the discovery of local hosts in a network. The Ansible role install Avahi and starts the daemon. If firewalld is installed, it will also allow mDNS traffic to path through.
+Avahi is a system which facilitates service discovery on a local network via the multicast DNS (mDNS) and DNS Service Discovery (DNS-SD) protocol suite. This Ansible role will install Avahi and start the daemon. If firewalld is installed, it will also allow mDNS traffic.
 
 ## Dependencies
 None.
