@@ -1,0 +1,19 @@
+---
+## Package Management
+avahi_package_name:
+  - "avahi"
+  - "avahi-tools"
+  - "nss-mdns"
+avahi_package_state: "present"
+
+## Service Management
+avahi_service_name: "avahi-daemon.service"
+avahi_service_state: "started"
+avahi_service_enabled: true
+
+## Firewall Management
+avahi_firewall_service: "mdns"
+avahi_firewall_state: "enabled"
+# avahi_firewall_zone: ""
+avahi_firewall_immediate: true
+avahi_firewall_permanent: true

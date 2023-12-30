@@ -1,0 +1,28 @@
+---
+- name: "Manage avahi packages"
+  ansible.builtin.package:
+    name: "{{ avahi_package_name }}"
+    state: "{{ avahi_package_state }}"
+  become: true
+  notify: "Restart avahi service"
+
+- name: "Gather package facts"
+  ansible.builtin.package_facts:
+
+- name: "Manage avahi services"
+  ansible.builtin.service:
+    name: "{{ avahi_service_name }}"
+    state: "{{ avahi_service_state }}"
+    enabled: "{{ avahi_service_enabled }}"
+  become: true
+  when: "'avahi' in ansible_facts.packages"
+
+- name: "Manage avahi firewall policy"
+  ansible.posix.firewalld:
+    service: "{{ avahi_firewall_service }}"
+    state: "{{ avahi_firewall_state }}"
+    zone: "{{ avahi_firewall_zone | default(omit) }}"
+    immediate: "{{ avahi_firewall_immediate }}"
+    permanent: "{{ avahi_firewall_permanent }}"
+  become: true
+  when: "'firewalld' in ansible_facts.packages"

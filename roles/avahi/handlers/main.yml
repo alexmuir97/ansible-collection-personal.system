@@ -1,0 +1,7 @@
+---
+- name: "Restart avahi service"
+  ansible.builtin.service:
+    name: "{{ avahi_service_name }}"
+    state: "restarted"
+  become: true
+  when: "'avahi' in ansible_facts.packages"
