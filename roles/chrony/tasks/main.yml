@@ -1,0 +1,29 @@
+---
+- name: "Manage chrony packages"
+  become: true
+  ansible.builtin.package:
+    name: "{{ chrony_package_name }}"
+    state: "{{ chrony_package_state }}"
+  notify: "Restart chrony service"
+
+- name: "Gather package facts"
+  ansible.builtin.package_facts:
+
+- name: "Manage chrony configuration"
+  become: true
+  ansible.builtin.template:
+    src: "chrony.conf.j2"
+    dest: "/etc/chrony.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Restart chrony service"
+  when: "'chrony' in ansible_facts.packages"
+
+- name: "Manage chrony services"
+  become: true
+  ansible.builtin.service:
+    name: "{{ chrony_service_name }}"
+    state: "{{ chrony_service_state }}"
+    enabled: "{{ chrony_service_enabled }}"
+  when: "'chrony' in ansible_facts.packages"

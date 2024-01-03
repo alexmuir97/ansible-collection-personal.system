@@ -1,0 +1,21 @@
+---
+## Package Management
+chrony_package_name: "chrony"
+chrony_package_state: "present"
+
+## Service Management
+chrony_service_name: "chronyd.service"
+chrony_service_state: "started"
+chrony_service_enabled: true
+
+## Configuration Management
+chrony_config_pools:
+  - name: "uk.pool.ntp.org"
+    options: "iburst"
+chrony_config_sourcedir: "/run/chrony-dhcp"
+chrony_config_driftfile: "/var/lib/chrony/drift"
+chrony_config_makestep: "1.0 3"
+chrony_config_rtcsync: true
+chrony_config_ntsdumpdir: "/var/lib/chrony"
+chrony_config_leapsectz: "right/UTC"
+chrony_config_logdir: "/var/log/chrony"
